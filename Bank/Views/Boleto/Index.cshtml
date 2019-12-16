@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Domain.Boleto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Boleto</h2>
+
+<p>
+    <a asp-action="Create">Cadastrar novo...</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdBoleto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DtVencimento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Valor)
+            </th>
+            <th>
+                Boleto gerado em
+            </th>
+            <th>
+                Conta
+            </th>
+            <th>
+                Nome titular
+            </th>
+            <th>
+                CPF
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdBoleto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DtVencimento)
+            </td>
+            <td>
+                R$ @Html.DisplayFor(modelItem => item.Valor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CriadoEm)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContaOrigem.IdContaCliente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContaOrigem.Pessoa.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContaOrigem.Pessoa.Cpf)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdBoleto">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.IdBoleto">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdBoleto">Excluir</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

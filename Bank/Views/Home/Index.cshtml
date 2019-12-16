@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Bem vindo!</h2>
+
+<label>Informe o CPF do cilente cadastrado ou funcionário para continuar:</label>
+<br />
+<form method="POST" asp-action="Login" asp-controller="Home">
+    <div class="form-group">
+        <label for="CPF">CPF</label>
+        <input type="text" name="cpf" class="form-control" placeholder="Informe seu CPF">
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Enviar</button>
+    <br />
+    <a asp-action="Create" asp-controller="Pessoa" style="font-size: 13px;font-style: oblique;">Não tem login? Clique aqui!</a>
+</form>

@@ -1,0 +1,159 @@
+﻿@model Domain.ContasRetorno
+
+@{
+    ViewData["Title"] = "Transferencia";
+}
+
+<h2>Transferencia</h2>
+
+<h4>Conta</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Transferencia">
+            @*Conta Origem*@
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">Conta Origem</label>
+                <input asp-for="C1.IdContaCliente" class="form-control" />
+                <span asp-validation-for="C1.IdContaCliente" class="text-danger"></span>
+                <input type="submit" asp-action="BuscarContaClienteOrigem" value="Buscar" class="btn btn-warning" style="width:100%; margin-top:5%;" />
+            </div>
+
+            @*Conta Destino*@
+            <div class="form-group">
+                <label class="control-label">Conta Destino</label>
+                <input asp-for="C2.IdContaCliente" class="form-control" />
+                <span asp-validation-for="C2.IdContaCliente" class="text-danger"></span>
+                <input type="submit" asp-action="BuscarContaClienteDestino" value="Buscar" class="btn btn-warning" style="width:100%; margin-top:5%;" />
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-12 control-label" for="ValorTransferencia">Valor transferência R$</label>
+                <div class="col-md-12">
+                    <input id="ValorTransferencia" name="ValorTransferencia" type="text" placeholder="Valor transferência R$" class="form-control input-md">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Transferir " class="btn btn-success" style="width:100%" />
+            </div>
+        </form>
+    </div>
+
+    @*------------------------------------------------CONTAS ENCONTRADAS@* ------------------------------------------------*@
+
+    <div class="col-md-4">
+        <div class="alert-warning" style="text-align:center; margin-bottom:5%">
+            <b>Conta Origem</b>
+        </div>
+        <hr style="color:black; background-color:gray;" />
+        @*-------------------------------Conta encontrada--------------------------------*@
+        <div class="form-group">
+            <label class="col-md-12" for="IdConta">Conta de origem</label>
+            <div class="col-md-12">
+                <input id="Id" asp-for="C1.IdContaCliente" name="IdContaCliente" type="text" disabled placeholder="Numero da conta" class="form-control input-md">
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-12" for="Titular">Titular</label>
+            <div class="col-md-12">
+                <input id="Nome" asp-for="C1.Pessoa.Nome" name="ContaClienteNome" type="text" disabled placeholder="Titular" class="form-control input-md">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-12" for="Cpf">CPF</label>
+            <div class="col-md-12">
+                <input id="Cpf" asp-for="C1.Pessoa.Cpf" name="ContaClienteCPF" type="text" disabled placeholder="CPF titular" class="form-control input-md">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-12" for="Saldo">Saldo</label>
+            <div class="col-md-12">
+                <input id="Saldo" asp-for="C1.Saldo" name="Saldo" type="text" disabled placeholder="Saldo R$" class="form-control input-md">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-12" for="CriadoEm">Cliente desde</label>
+            <div class="col-md-12">
+                <input id="CriadoEm" asp-for="C1.CriadoEm" name="CriadoEm" type="text" disabled placeholder="Data do cadastro" class="form-control input-md">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-12" for="Status">Status</label>
+            <div class="col-md-12">
+                <input id="Status" asp-for="C1.Status" name="Status" type="text" disabled placeholder="Status" class="form-control input-md">
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <input type="submit" style="width:100%" value="Limpar" onclick="window.location.reload();" class="btn btn-danger" />
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+        <div class="alert-warning" style="text-align:center; margin-bottom:5%">
+            <b>Conta Destino</b>
+        </div>
+        <hr style="color:black; background-color:gray;" />
+        @*-------------------------------Conta encontrada--------------------------------*@
+        <div class="form-group">
+            <label class="col-md-12" for="IdConta">Conta de origem</label>
+            <div class="col-md-12">
+                <input id="Id" asp-for="C2.IdContaCliente" name="IdContaCliente" type="text" disabled placeholder="Numero da conta" class="form-control input-md">
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-12" for="Titular">Titular</label>
+            <div class="col-md-12">
+                <input id="Nome" asp-for="C2.Pessoa.Nome" name="ContaClienteNome" type="text" disabled placeholder="Titular" class="form-control input-md">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-12" for="Cpf">CPF</label>
+            <div class="col-md-12">
+                <input id="Cpf" asp-for="C2.Pessoa.Cpf" name="ContaClienteCPF" type="text" disabled placeholder="CPF titular" class="form-control input-md">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-12" for="Saldo">Saldo</label>
+            <div class="col-md-12">
+                <input id="Saldo" asp-for="C2.Saldo" name="Saldo" type="text" disabled placeholder="Saldo R$" class="form-control input-md">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-12" for="CriadoEm">Cliente desde</label>
+            <div class="col-md-12">
+                <input id="CriadoEm" asp-for="C2.CriadoEm" name="CriadoEm" type="text" disabled placeholder="Data do cadastro" class="form-control input-md">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-12" for="Status">Status</label>
+            <div class="col-md-12">
+                <input id="Status" asp-for="C2.Status" name="Status" type="text" disabled placeholder="Status" class="form-control input-md">
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <input type="submit" style="width:100%" value="Limpar" onclick="window.location.reload();" class="btn btn-danger" />
+        </div>
+
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Retornar para lista</a>
+</div>
